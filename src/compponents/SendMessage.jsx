@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
@@ -8,7 +8,7 @@ const style = {
   button: `w-[20%] bg-green-500`,
 };
 
-const SendMessage = ({ scroll }) => {
+const SendMessage = ({ scroll, setLoading, loading }) => {
   const [input, setInput] = useState("");
 
   const sendMessage = async (e) => {
@@ -17,6 +17,8 @@ const SendMessage = ({ scroll }) => {
       alert("Please enter a valid message");
       return;
     }
+    setLoading(!loading);
+    setInput("");
     const { uid, displayName } = auth.currentUser;
     await addDoc(collection(db, "messages"), {
       text: input,
