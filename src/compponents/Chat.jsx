@@ -23,7 +23,6 @@ const Chat = () => {
   }, [messages]);
   return (
     <>
-      {" "}
       <main className={style.main}>
         {messages &&
           messages.map((message) => (
@@ -31,7 +30,6 @@ const Chat = () => {
           ))}
       </main>
       <SendMessage scroll={scroll} />
-      {/* send message component */}
       <span ref={scroll}></span>
     </>
   );
